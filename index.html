@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e9eeea">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="light">
+<title>习惯打卡</title>
+<link rel="stylesheet" href="styles.css?v=20260913a">
+</head>
+<body>
+
+<main class="app">
+  <!-- 本周完成情况 -->
+  <section class="card week-card" aria-labelledby="weekTitle">
+    <div class="week-head">
+      <h2 id="weekTitle">本周完成情况</h2>
+      <span id="weekRange" class="week-range"></span>
+    </div>
+    <ul id="weekBars" class="week-bars" aria-label="本周每天完成项数"></ul>
+    <p id="weekSummary" class="week-summary"></p>
+  </section>
+
+  <!-- 顶部：日期 + 今日进度 -->
+  <header class="card header">
+    <div class="header-left">
+      <div class="date-line">
+        <span class="dot" aria-hidden="true"></span>
+        <h1 id="dateTitle">—</h1>
+      </div>
+      <p id="statusText" class="status">…</p>
+    </div>
+    <div class="ring-wrap" title="今日完成进度" role="img" aria-label="今日完成进度">
+      <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#a9dcbd"/>
+            <stop offset="100%" stop-color="#4b9b70"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-track" cx="60" cy="60" r="50"/>
+        <circle class="ring-bar" id="ringBar" cx="60" cy="60" r="50" pathLength="100"/>
+      </svg>
+      <div class="ring-center">
+        <span id="ringDone">0</span>
+        <span id="ringTotal" class="ring-total">/ 0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 今日清单 -->
+  <section>
+    <h2 id="listTitle" class="list-title">今日打卡</h2>
+    <ul id="habitList" class="habit-list"></ul>
+    <div id="emptyState" class="empty" hidden>
+      <div class="empty-icon" aria-hidden="true">🌱</div>
+      <p>还没有习惯</p>
+      <p class="empty-sub">点下面的「添加习惯」，从第一个开始吧</p>
+    </div>
+  </section>
+
+  <!-- 添加习惯 -->
+  <button id="addToggle" class="add-toggle" type="button" aria-expanded="false" aria-controls="addPanel">
+    <span class="plus" aria-hidden="true">＋</span>添加习惯
+  </button>
+  <div id="addPanel" class="card add-panel" hidden>
+    <p class="add-hint">快捷添加，点一下就加好了：</p>
+    <div id="presets" class="presets"></div>
+    <form id="addForm" class="add-form" autocomplete="off">
+      <input id="newHabit" type="text" maxlength="20" placeholder="或者自己输入，例如：喝水 2000ml" aria-label="新习惯名称">
+      <button type="submit" class="btn-add">添加</button>
+    </form>
+  </div>
+
+  <footer class="foot">数据只保存在本机浏览器 · 每天按日期自动记录，无需手动重置</footer>
+</main>
+
+<!-- 删除确认弹窗 -->
+<div id="modal" class="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalText">
+    <p id="modalText" class="modal-text"></p>
+    <div class="modal-actions">
+      <button id="modalCancel" class="btn ghost" type="button">再想想</button>
+      <button id="modalOk" class="btn danger" type="button">删除</button>
+    </div>
+  </div>
+</div>
+
+<!-- 轻提示 -->
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script src="app.js?v=20260911c"></script>
+</body>
+</html>
